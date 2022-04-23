@@ -13,7 +13,7 @@ replace (
 )
 
 require (
-	github.com/aiyengar2/helm-project-operator v0.0.0-20220420185950-427c8c2a4fc0
+	github.com/aiyengar2/helm-project-operator v0.0.0-20220425234123-1aa5988b8b0e
 	github.com/rancher/wrangler v0.8.11-0.20220217210408-3ecd23dfea3b
 	github.com/rancher/wrangler-cli v0.0.0-20211112052728-f172e9bf59af
 	github.com/spf13/cobra v1.4.0
@@ -24,9 +24,11 @@ require (
 	github.com/Masterminds/squirrel v1.5.2 // indirect
 	github.com/aiyengar2/helm-locker v0.0.0-20220412032807-79bebdaff112 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
+	github.com/blang/semver v3.5.1+incompatible // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/cyphar/filepath-securejoin v0.2.3 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/emicklei/go-restful v2.9.5+incompatible // indirect
 	github.com/evanphx/json-patch v4.12.0+incompatible // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/go-logr/logr v1.2.0 // indirect
@@ -81,7 +83,9 @@ require (
 	k8s.io/api v0.23.3 // indirect
 	k8s.io/apiextensions-apiserver v0.23.1 // indirect
 	k8s.io/apimachinery v0.23.3 // indirect
+	k8s.io/apiserver v0.23.1 // indirect
 	k8s.io/client-go v0.23.3 // indirect
+	k8s.io/component-base v0.23.1 // indirect
 	k8s.io/klog v1.0.0 // indirect
 	k8s.io/klog/v2 v2.30.0 // indirect
 	k8s.io/kube-openapi v0.0.0-20211115234752-e816edb12b65 // indirect
