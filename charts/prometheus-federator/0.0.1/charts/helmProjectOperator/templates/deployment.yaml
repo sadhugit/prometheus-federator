@@ -39,6 +39,19 @@ spec:
 {{- if .Values.global.cattle.clusterId }}
           - --cluster-id={{ .Values.global.cattle.clusterId }}
 {{- end }}
+{{- if .Values.releaseRoleBindings.aggregate }}
+{{- if .Values.releaseRoleBindings.clusterRoleRefs }}
+{{- if .Values.releaseRoleBindings.clusterRoleRefs.admin }}
+          - --admin-cluster-role={{ .Values.releaseRoleBindings.clusterRoleRefs.admin }}
+{{- end }}
+{{- if .Values.releaseRoleBindings.clusterRoleRefs.edit }}
+          - --edit-cluster-role={{ .Values.releaseRoleBindings.clusterRoleRefs.edit }}
+{{- end }}
+{{- if .Values.releaseRoleBindings.clusterRoleRefs.view }}
+          - --view-cluster-role={{ .Values.releaseRoleBindings.clusterRoleRefs.view }}
+{{- end }}
+{{- end }}
+{{- end }}
 {{- if .Values.debug }}
           - --debug
           - --debug-level={{ .Values.debugLevel }}
@@ -51,6 +64,15 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: spec.nodeName
+          ports:
+          - containerPort: 80
+            protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 30
 {{- if .Values.resources }}
           resources: {{ toYaml .Values.resources | nindent 12 }}
 {{- end }}
