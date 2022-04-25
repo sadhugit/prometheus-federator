@@ -72,8 +72,25 @@ global:
     create: true
 
     userRoles:
-      ## Create default user ClusterRoles to allow users to interact with Prometheus CRs, ConfigMaps, and Secrets
+      ## Create default user Roles that the Helm Project Operator will automatically create RoleBindings for
+      ##
+      ## How does this work?
+      ##
+      ## The operator will watch for all subjects bound to each Kubernetes default ClusterRole in **all** namespaces
+      ## targeted by a Project; if it observes a subject bound to a particular role in all project namespaces (e.g. edit),
+      ## it will automatically create a RoleBinding to the default Operator Role in that namespace (e.g. hpo-monitoring-admin)
+      ##
+      ## All RoleBindings attached to those default operator roles will automatically be synced with all Roles in the Project
+      ## Release namespace with the label 'helm.cattle.io/project-helm-chart-role-aggregate-from: admin' (or whatever role)
+      ## it is targeted towards, e.g. cluster-admin, admin, edit or view
+      ##
+      ## To manually assign a user permission in the release namespace, simply bind them to the default Operator roles (e.g. hpo-monitoring-<role>)
+      ## in the Project registration namespace and those RoleBindings will also be synced. To prevent escalating privileges, a dummy verb is assigned
+      ## to the default Operator role which forces an escalation check on an under-privileged user trying to grant permissions to other users.
+      ## 
       create: true
+      ## Add labels to Roles
+      aggregateToDefaultRoles: true
 
     pspEnabled: true
     pspAnnotations: {}
